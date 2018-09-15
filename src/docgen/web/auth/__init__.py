@@ -32,38 +32,42 @@ def requires_login(func):
             return login()
         if not auth.user_is_authorized():
             logout()
-            return 'You do not have access to this resource.', 403
+            return "You do not have access to this resource.", 403
         return func(*args, **kwargs)
+
     return wrapper
 
 
-blueprint = Blueprint('auth', __name__)
+blueprint = Blueprint("auth", __name__)
 
 
-@blueprint.route('/login')
+@blueprint.route("/login")
 def login():
     if settings.auth_required:
         return current_app.auth.login()
-    return flask.redirect(flask.url_for('index'))
+    return flask.redirect(flask.url_for("index"))
 
 
-@blueprint.route('/login/authorized')
+@blueprint.route("/login/authorized")
 def authorized():
     if settings.auth_required:
         if not current_app.auth.is_oauth:
-            raise RuntimeError('attempting oauth authorized callback without'
-                               'an oauth-enabled Authenticator!')
+            raise RuntimeError(
+                "attempting oauth authorized callback without"
+                "an oauth-enabled Authenticator!"
+            )
         current_app.auth.oauth_authorize()
-    return flask.redirect(flask.url_for('index'))
+    return flask.redirect(flask.url_for("index"))
 
 
-@blueprint.route('/logout')
+@blueprint.route("/logout")
 def logout():
-    current_app.auth.logout ()
-    return 'You have been logged out.'
+    current_app.auth.logout()
+    return "You have been logged out."
 
 
 def get_authenticator(app=flask.current_app):
     import importlib
-    mod = importlib.import_module(__name__ + '.' + settings.auth_type)
+
+    mod = importlib.import_module(__name__ + "." + settings.auth_type)
     return mod.get_authenticator(app)

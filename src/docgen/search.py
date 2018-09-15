@@ -33,7 +33,7 @@ class Search:
         try:
             self.indexer = whoosh.index.open_dir(path)
         except whoosh.index.EmptyIndexError:
-            log.warning('error reading whoosh index, re-creating')
+            log.warning("error reading whoosh index, re-creating")
             self._create_index()
 
     def _create_index(self):
@@ -50,22 +50,22 @@ class Search:
         Indexer(self.indexer.writer()).run(contents)
 
     def search(self, search_for, num_results=5):
-        qp = whoosh.qparser.QueryParser('content', self.indexer.schema)
+        qp = whoosh.qparser.QueryParser("content", self.indexer.schema)
         query = qp.parse(search_for)
         ret = []
         with self.indexer.searcher() as searcher:
             for hit in searcher.search(query)[:num_results]:
                 highlight = src_path = None
-                if 'src_path' in hit:
-                    src_path = hit['src_path']
+                if "src_path" in hit:
+                    src_path = hit["src_path"]
                     with open(src_path) as fh:
                         contents = fh.read()
-                    highlight = hit.highlights('content', text=contents)
+                    highlight = hit.highlights("content", text=contents)
                 result = Result(
-                    path=hit['path'],
-                    title=hit['title'],
+                    path=hit["path"],
+                    title=hit["title"],
                     highlight=highlight,
-                    src_path=src_path
+                    src_path=src_path,
                 )
                 ret.append(result)
         return ret
@@ -78,16 +78,16 @@ class Indexer:
     def run(self, contents):
         for content in contents:
             self.add_index(content)
-        log.info('committing search index')
+        log.info("committing search index")
         self.writer.commit()
 
     def add_index(self, content):
-        if hasattr(content, 'content'):
-            log.debug('adding content to search index: %r', content)
+        if hasattr(content, "content"):
+            log.debug("adding content to search index: %r", content)
             self.writer.add_document(
                 title=content.title,
                 path=content.get_path(),
-                src_path=getattr(content, '_source_path_abs', None),
+                src_path=getattr(content, "_source_path_abs", None),
                 content=content.content,
             )
 
@@ -97,4 +97,5 @@ class Indexer:
 
 def get_search():
     from docgen.globals import settings
-    Search(settings.source_dir + '/_idx')
+
+    Search(settings.source_dir + "/_idx")

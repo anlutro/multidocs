@@ -7,7 +7,7 @@ import docgen.web.static
 
 
 def get_app():
-    app = flask.Flask('docgen')
+    app = flask.Flask("docgen")
     app.secret_key = docgen.globals.settings.secret_key
     app.search = docgen.search.get_search()
     app.auth = docgen.web.auth.get_authenticator()
@@ -19,6 +19,7 @@ def get_app():
     return app
 
 
-def run_server(host='0.0.0.0', port=5000, debug=False):
-	from werkzeug.serving import run_simple
-	run_simple(host, port, get_app(), use_reloader=debug, use_debugger=debug)
+def run_server(host="0.0.0.0", port=5000, debug=False):
+    from werkzeug.serving import run_simple
+
+    run_simple(host, port, get_app(), use_reloader=debug, use_debugger=debug)

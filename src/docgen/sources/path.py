@@ -7,7 +7,7 @@ from docgen.entities import SourceFile, SourceDirectory
 def populate_children(parent, path, root_path):
     with os.scandir(path) as entries:
         for entry in entries:
-            if entry.name.startswith('.'):
+            if entry.name.startswith("."):
                 continue
 
             relpath = os.path.relpath(entry.path, root_path)
