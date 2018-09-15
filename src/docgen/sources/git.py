@@ -38,8 +38,8 @@ def download_source(url, **kwargs):
     source = GitSource(url, **kwargs)
     git_path = os.path.join(settings.source_dir, source.slug)
     if os.path.exists(os.path.join(git_path, '.git')):
-        res = subprocess.run(['git', '-C', git_path, 'remote', '-v'], env=env,
-                              capture_output=True, encoding='utf-8', check=True)
+        res = subprocess.run(['git', '-C', git_path, 'remote', '-v'],
+                             env=env, capture_output=True, encoding='utf-8', check=True)
         # todo: this needs to be improved
         if url not in res.stdout:
             print(res.stdout)
@@ -47,6 +47,11 @@ def download_source(url, **kwargs):
         subprocess.run(['git', '-C', git_path, 'pull'], env=env, check=True)
     else:
         subprocess.run(['git', 'clone', url, git_path], env=env, check=True)
+
+    if not source.branch:
+        res = subprocess.run(['git', '-C', git_path, 'rev-parse', '--abbrev-ref', 'HEAD'],
+                             env=env, capture_output=True, encoding='utf-8', check=True)
+        source.branch = res.stdout.strip()
 
     populate_source_from_path(source, os.path.join(git_path, source.root_dir))
     populate_source_urls(source)
