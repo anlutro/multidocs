@@ -1,0 +1,19 @@
+sources:
+  - type: git
+    url: https://github.com/anlutro/prove-cm
+    root_dir: docs
+
+settings:
+  source_dir: ./src
+  target_dir: ./dist
+  secret_key: ThisIsNotSecure
+
+  # authentication options
+  auth_required: false
+  auth_type: github
+  auth_github_key: ...
+  auth_github_secret: ...
+  # only users who are members of any of these orgs
+  auth_github_orgs: [foo, bar]
+  # only users who are members of any of these teams
+  auth_github_teams: [foo/team1, foo/team2, bar/team3]

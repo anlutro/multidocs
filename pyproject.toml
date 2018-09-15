@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "docgen"
+description = "Generate documentation"
+authors = ["Andreas Lutro <anlutro@gmail.com>"]
+version = "0.1"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+bleach = "*"
+commonmarkextensions = "*"
+flask = "*"
+flask-oauthlib = "*"
+gitpython = "*"
+jinja2 = "*"
+python-slugify = "*"
+pyyaml = "*"
+whoosh = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-flask = "*"
+pylint = "*"
+black = "*"
+
+[tool.poetry.scripts]
+docgen = "docgen.cli:main"
