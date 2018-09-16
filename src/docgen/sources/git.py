@@ -9,7 +9,10 @@ from .path import populate_source_from_path
 
 def github_cb(path, source):
     path_type = "tree" if path.is_dir else "blob"
-    path.url = f"{source.url}/{path_type}/{source.branch}/{source.root_dir}/{path.path}"
+    path_in_repo = os.path.join(source.root_dir, path.path)
+    path.url = f"{source.url}/{path_type}/{source.branch}/{path_in_repo}"
+    if not path.is_dir:
+        path.edit_url = f"{source.url}/edit/{source.branch}/{path_in_repo}"
 
 
 def populate_urls(node, source, url_cb):

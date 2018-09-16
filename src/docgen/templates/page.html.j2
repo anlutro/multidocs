@@ -1,8 +1,8 @@
 {% extends 'layout.html.j2' %}
 
 {% macro edit_link() %}
-    {% if edit_url is defined %}
-        <a href="{{ edit_url }}" target="_blank" class="edit-link">Edit on github</a>
+    {% if page.source.edit_url %}
+        <a href="{{ page.source.edit_url }}" target="_blank" class="edit-link">Edit on github</a>
     {% endif %}
 {% endmacro %}
 
