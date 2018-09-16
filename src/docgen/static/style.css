@@ -1,0 +1,165 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    line-height: 1.5;
+    overflow-y: scroll;
+}
+
+.container {
+    width: 100%;
+    max-width: 70rem;
+    margin: 0 auto;
+
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: box;
+
+    -ms-flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -ms-box-orient: horizontal;
+    box-orient: horizontal;
+}
+
+.sidebar {
+    border-right: 1px solid #ccc;
+    padding-top: 2rem;
+    padding-right: 2rem;
+
+    width: 20rem;
+    -ms-flex: 0 20rem;
+    -webkit-box-flex:  0;
+    -moz-box-flex:  0;
+    -ms-box-flex:  0;
+    box-flex:  0;  
+}
+
+.content {
+    padding-left: 2rem;
+
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    box-flex: 1;  
+}
+
+.content-footer {
+    color: #666;
+}
+
+.edit-link {
+    float: right;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+blockquote {
+    margin-left: .1em;
+    padding-left: .9em;
+    border-left: 2px solid #ccc;
+    color: #555;
+}
+
+/* tables */
+table {
+    margin: 1em;
+}
+th {
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+th, td {
+    padding: .2em;
+    line-height: 1.3;
+}
+
+/* inline code blocks */
+code {
+    background: #f3f3f3;
+    padding: 2px 4px;
+}
+
+/* multi-line code blocks */
+pre > code {
+    background: #f3f3f3;
+    border: 1px solid #ddd;
+    padding: 4px 8px;
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+/* COLLAPSIBLE LISTS - mostly copy/pasted */
+.treeView {
+    -moz-user-select:none;
+    position:relative;
+}
+
+.treeView ul {
+    margin:0 0 0 -1.5em;
+    padding:0 0 0 1.5em;
+}
+ul.treeView {
+    padding: 0;
+    margin: 0;
+}
+
+.treeView ul ul {
+    background:url('list-item-contents.png') repeat-y left;
+}
+
+.treeView li:last-child > ul {
+    background-image:none;
+}
+
+.treeView li {
+    margin:0;
+    padding:0;
+    background:url('list-item-root.png') no-repeat top left;
+    list-style-position:inside;
+    list-style-image:url('button.png');
+    cursor:auto;
+}
+.treeView li.collapsibleListRoot {
+    background:url('list-item-root.png') no-repeat top left !important;
+}
+
+.treeView li.collapsibleListOpen {
+    list-style-image:url('button-open.png');
+    cursor:pointer;
+}
+
+.treeView li.collapsibleListClosed {
+    list-style-image:url('button-closed.png');
+    cursor:pointer;
+}
+
+.treeView li li {
+    background-image:url('list-item.png');
+    padding-left:1.5em;
+}
+
+.treeView li:last-child {
+    background-image:url('list-item-last.png');
+}
+
+.treeView li.collapsibleListOpen {
+    background-image:url('list-item-open.png');
+}
+
+.treeView li.collapsibleListOpen:last-child {
+    background-image:url('list-item-last-open.png');
+}

@@ -69,6 +69,13 @@ class Directory(Content):
     is_dir = True
 
 
+class ContentRoot(Directory):
+    def __init__(self, sources, title=None):
+        self.path = self.slug = ''
+        self.title = title or 'Index'
+        self.children = sources
+
+
 class ContentSource(Directory):
     def __init__(self, source):
         super().__init__(

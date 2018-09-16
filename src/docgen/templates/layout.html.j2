@@ -28,8 +28,8 @@
         </form>
         <ul class="treeView">
             <li class="collapsibleListRoot">
-                Content
-                {{ render_sidebar_children(sources, 'collapsibleList') }}
+                {{ root.title }}
+                {{ render_sidebar_children(root.children, 'collapsibleList') }}
             </li>
         </ul>
     </aside>

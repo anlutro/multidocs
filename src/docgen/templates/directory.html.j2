@@ -20,7 +20,7 @@
         <h1 class="directory-title">{{ directory.title }}</h1>
     </header>
     <div class="directory-content">
-        {{ render_page_children(directory.children) }}
+        {{ render_page_children(directory.children, deep=False) }}
     </div>
     <footer class="content-footer">
         <time>Generated at {{ now.isoformat() }}</time>

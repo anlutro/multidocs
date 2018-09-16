@@ -39,8 +39,11 @@ def generate_html():
         source = download_source(**source_cfg)
         sources[source] = entities.ContentSource(source)
 
+    root = entities.ContentRoot(sources.values())
+    contents = {None: root}
+
     for source, content_source in sources.items():
-        contents = {source: content_source}
+        contents[source] = content_source
 
         for path in iter_path(source):
             kwargs = dict(
@@ -69,19 +72,21 @@ def generate_html():
             content = cls(**kwargs)
             contents[path] = content
 
+    sources = list(sources.values())
+
     for content in contents.values():
         content_path = os.path.join(settings.target_dir, content.path)
 
         if content.is_dir:
             html = j2.get_template("directory.html.j2").render(
-                directory=content, sources=sources.values()
+                directory=content, root=root
             )
             content_dir = content_path
             content_path = os.path.join(content_path, "index.html")
         else:
             page_html = page_to_html(content)
             html = j2.get_template("page.html.j2").render(
-                page=content, page_html=page_html, sources=sources.values()
+                page=content, page_html=page_html, root=root
             )
             content_dir = os.path.dirname(content_path)
 
