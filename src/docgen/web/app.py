@@ -1,3 +1,5 @@
+import os.path
+
 import flask
 import docgen.globals
 import docgen.search
@@ -7,7 +9,8 @@ import docgen.web.static
 
 
 def get_app():
-    app = flask.Flask("docgen")
+    static_folder = os.path.join(os.path.dirname(__file__), 'static')
+    app = flask.Flask("docgen", static_folder=static_folder)
     app.secret_key = docgen.globals.settings.secret_key
     app.search = docgen.search.get_search()
     app.auth = docgen.web.auth.get_authenticator(app)

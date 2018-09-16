@@ -12,7 +12,7 @@ blueprint = Blueprint("static", __name__)
 
 @blueprint.route("/<path:path>")
 @requires_login
-def static_file(path):
+def serve_html(path):
     full_path = os.path.join(settings.target_dir, path)
     if os.path.isdir(full_path):
         path += "/index.html"
@@ -22,4 +22,4 @@ def static_file(path):
 
 @blueprint.route("/")
 def index():
-    return static_file("index.html")
+    return serve_html("index.html")
