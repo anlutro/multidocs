@@ -9,7 +9,11 @@
 
 
 <div class="container">
-    {% include "sidebar.html.j2" %}
+    {% if sidebar_html is defined %}
+        {{ sidebar_html | safe }}
+    {% else %}
+        {% include "sidebar.html.j2" %}
+    {% endif %}
 
     <main class="content">
         {% block content %}{% endblock %}

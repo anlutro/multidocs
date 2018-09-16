@@ -99,5 +99,17 @@ def generate_html():
         with open(content_path, "w+") as fh:
             fh.write(html)
 
+    sidebar_path = os.path.join(settings.target_dir, "_sidebar.html")
+    html = j2.get_template("sidebar.html.j2").render(root=root)
+    with open(sidebar_path, "w+") as fh:
+        fh.write(html)
+
     search = docgen.search.get_search()
     search.index_contents(root)
+
+
+def get_sidebar_html():
+    sidebar_path = os.path.join(settings.target_dir, "_sidebar.html")
+    if os.path.exists(sidebar_path):
+        with open(sidebar_path) as fh:
+            return fh.read()

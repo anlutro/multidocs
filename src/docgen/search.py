@@ -31,12 +31,13 @@ class Search:
         if not os.path.exists(self.idx_path):
             self.index = self._create_index()
         try:
-            self.index = whoosh.index.open_dir(path)
+            self.index = whoosh.index.open_dir(self.idx_path)
         except whoosh.index.EmptyIndexError:
-            log.warning("error reading whoosh index, re-creating")
+            log.warning("error reading whoosh index")
             self._create_index()
 
     def _create_index(self):
+        log.info("re-creating search index")
         if os.path.exists(self.idx_path):
             shutil.rmtree(self.idx_path)
         os.makedirs(self.idx_path)

@@ -6,14 +6,11 @@ import logging
 
 def serve_webapp(args):
     import docgen.web.app
-
     docgen.web.app.run_server()
 
 
 def generate_html(args):
-    logging.basicConfig(level=logging.DEBUG)
     import docgen.content
-
     docgen.content.generate_html()
 
 
@@ -22,6 +19,8 @@ def main():
     parser.add_argument("-c", "--config")
     parser.add_argument("command")
     args = parser.parse_args()
+
+    logging.basicConfig(level=logging.DEBUG)
 
     if args.config:
         os.environ.setdefault("DOCGEN_CONFIG_FILE", os.path.abspath(args.config))
