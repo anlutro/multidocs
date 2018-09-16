@@ -1,4 +1,5 @@
 import functools
+import importlib
 
 import flask
 from flask import current_app
@@ -67,7 +68,5 @@ def logout():
 
 
 def get_authenticator(app=flask.current_app):
-    import importlib
-
     mod = importlib.import_module(__name__ + "." + settings.auth_type)
     return mod.get_authenticator(app)

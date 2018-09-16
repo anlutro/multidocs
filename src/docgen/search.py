@@ -7,6 +7,8 @@ import whoosh.index
 import whoosh.fields
 import whoosh.qparser
 
+from docgen.globals import settings
+
 log = logging.getLogger(__name__)
 
 schema = whoosh.fields.Schema(
@@ -89,6 +91,4 @@ class Search:
 
 
 def get_search():
-    from docgen.globals import settings
-
     return Search(settings.source_dir + "/_idx")
