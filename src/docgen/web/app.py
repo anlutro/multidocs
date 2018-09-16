@@ -9,7 +9,7 @@ import docgen.web.static
 
 
 def get_app():
-    static_folder = os.path.join(os.path.dirname(__file__), 'static')
+    static_folder = os.path.join(os.path.dirname(__file__), "static")
     app = flask.Flask("docgen", static_folder=static_folder)
     app.secret_key = docgen.globals.settings.secret_key
     app.search = docgen.search.get_search()

@@ -1,0 +1,27 @@
+{% macro render_sidebar_children(children, class='') %}
+    <ul class="{{ class }}">
+    {% for child in children | sort %}
+        <li>
+            <a href="/{{ child.path }}">{{ child.title }}</a>
+            {% if child.children %}
+                {{ render_sidebar_children(child.children) }}
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endmacro %}
+
+<aside class="sidebar">
+    <form action="/search">
+        <input name="for" type="text" placeholder="Search for ...">
+        <input type="submit" value="Search">
+    </form>
+    {% if root is defined %}
+    <ul class="treeView">
+        <li class="collapsibleListRoot">
+            {{ root.title }}
+            {{ render_sidebar_children(root.children, 'collapsibleList') }}
+        </li>
+    </ul>
+    {% endif %}
+</aside>

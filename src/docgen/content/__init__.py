@@ -84,18 +84,14 @@ def generate_html():
         content_path = os.path.join(settings.target_dir, content.path)
 
         if content.is_dir:
-            html = j2.get_template("directory.html.j2").render(
-                directory=content, root=root
-            )
             content_dir = content_path
             content_path = os.path.join(content_path, "index.html")
         else:
-            page_html = page_to_html(content)
-            page_html = linker.linkify(page_html)
-            html = j2.get_template("page.html.j2").render(
-                page=content, page_html=page_html, root=root
-            )
+            content.html = page_to_html(content)
+            content.html = linker.linkify(content.html)
             content_dir = os.path.dirname(content_path)
+
+        html = j2.get_template("content.html.j2").render(content=content, root=root)
 
         if not os.path.exists(content_dir):
             os.makedirs(content_dir)

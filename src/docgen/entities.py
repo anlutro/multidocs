@@ -84,6 +84,7 @@ class ContentRoot(Directory):
         self.path = self.slug = ""
         self.title = title or "Index"
         self.children = sources
+        self.source = None
 
 
 class ContentSource(Directory):
