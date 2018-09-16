@@ -7,15 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6"
-bleach = "*"
-commonmarkextensions = "*"
-flask = "*"
-flask-oauthlib = "*"
-gitpython = "*"
-jinja2 = "*"
-python-slugify = "*"
-pyyaml = "*"
-whoosh = "*"
+bleach = "^2.1"
+commonmarkextensions = "^0.8"
+flask = "^1.0"
+flask-oauthlib = "^0.9"
+jinja2 = "^2.8"
+python-slugify = "^0.12"
+pyyaml = "^3.12"
+whoosh = "^2.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
