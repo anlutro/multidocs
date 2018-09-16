@@ -1,6 +1,7 @@
 import argparse
 import os
 import os.path
+import logging
 
 
 def serve_webapp(args):
@@ -10,6 +11,7 @@ def serve_webapp(args):
 
 
 def generate_html(args):
+    logging.basicConfig(level=logging.DEBUG)
     import docgen.content
 
     docgen.content.generate_html()

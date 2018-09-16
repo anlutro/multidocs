@@ -4,6 +4,7 @@ import re
 
 import bleach.linkifier
 
+import docgen.search
 from docgen.globals import config, settings, j2
 from docgen.sources import download_source
 from docgen import entities
@@ -101,3 +102,6 @@ def generate_html():
 
         with open(content_path, "w+") as fh:
             fh.write(html)
+
+    search = docgen.search.get_search()
+    search.index_contents(root)

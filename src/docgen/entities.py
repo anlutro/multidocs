@@ -2,6 +2,18 @@ import os.path
 
 import slugify
 
+from docgen.globals import settings
+
+
+def _get_source(obj, source=None):
+    if source is None:
+        source = obj.parent
+        while not isinstance(source, Source):
+            if source is None:
+                return None
+            source = source.parent
+    return source
+
 
 class Source:
     def __init__(self, url, root_dir, title=None, slug=None):
@@ -10,6 +22,7 @@ class Source:
         self.title = title or os.path.basename(url)
         self.slug = slug or slugify.slugify(self.title)
         self.path = self.slug
+        self.abspath = os.path.join(settings.source_dir, self.path, self.root_dir)
         self.children = set()
 
     def __repr__(self):
@@ -42,11 +55,8 @@ class Path:
 class SourcePath(Path):
     def __init__(self, path, parent=None, source=None):
         super().__init__(path, parent=parent)
-        if source is None:
-            source = self.parent
-            while not isinstance(source, Source):
-                source = source.parent
-        self.source = source
+        self.source = _get_source(self, source)
+        self.abspath = os.path.join(self.source.abspath, self.path)
 
 
 class SourceFile(SourcePath):

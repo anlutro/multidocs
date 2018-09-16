@@ -26,12 +26,14 @@
             <input name="for" type="text" placeholder="Search for ...">
             <input type="submit" value="Search">
         </form>
+        {% if root is defined %}
         <ul class="treeView">
             <li class="collapsibleListRoot">
                 {{ root.title }}
                 {{ render_sidebar_children(root.children, 'collapsibleList') }}
             </li>
         </ul>
+        {% endif %}
     </aside>
     <main class="content">
         {% block content %}{% endblock %}

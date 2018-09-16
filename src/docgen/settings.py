@@ -1,7 +1,7 @@
 import os
 import os.path
 
-from ._config import get_config
+from .config import get_config
 
 
 class Undefined:

@@ -10,7 +10,7 @@ def get_app():
     app = flask.Flask("docgen")
     app.secret_key = docgen.globals.settings.secret_key
     app.search = docgen.search.get_search()
-    app.auth = docgen.web.auth.get_authenticator()
+    app.auth = docgen.web.auth.get_authenticator(app)
 
     app.register_blueprint(docgen.web.auth.blueprint)
     app.register_blueprint(docgen.web.search.blueprint)
