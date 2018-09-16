@@ -5,6 +5,7 @@ __pycache__
 *.egg-info
 .eggs
 /dist
+/pyproject.lock
 
 # pytest
 /.pytest_cache
@@ -14,10 +15,6 @@ __pycache__
 # virtualenv
 /.venv
 /.virtualenv
-/include
-/lib
-/lib64
-/share
 
 # other
 /example/src
