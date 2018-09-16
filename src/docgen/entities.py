@@ -71,8 +71,8 @@ class Directory(Content):
 
 class ContentRoot(Directory):
     def __init__(self, sources, title=None):
-        self.path = self.slug = ''
-        self.title = title or 'Index'
+        self.path = self.slug = ""
+        self.title = title or "Index"
         self.children = sources
 
 

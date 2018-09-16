@@ -2,24 +2,29 @@ import os
 import os.path
 import re
 
+import bleach.linkifier
+
 from docgen.globals import config, settings, j2
 from docgen.sources import download_source
 from docgen import entities
+from .markdown import page_to_html, extract_title
 
-from .markdown import page_to_html
+
+def _linkify_callback(attrs, new=False):
+    if not new:
+        return attrs
+
+    # try to filter out things that might look like URLs but aren't
+    if (
+        not attrs["_text"].startswith(("http:", "https:", "www."))
+        and "/" not in attrs["_text"]
+    ):
+        return None
+
+    return attrs
 
 
-def find_markdown_title(markdown):
-    prev_line = None
-    for line in markdown.splitlines():
-        # prevent comments in code blocks from becoming titles
-        if line.startswith("```"):
-            return
-        if line.startswith("# "):
-            return line[2:].strip()
-        if prev_line and line.count("=") >= len(prev_line) / 2:
-            return prev_line
-        prev_line = line.strip()
+linker = bleach.linkifier.Linker(callbacks=[_linkify_callback])
 
 
 def guess_file_title(file_name):
@@ -64,7 +69,7 @@ def generate_html():
                 kwargs["body"] = file_contents
 
                 if path.path.endswith(".md"):
-                    kwargs["title"] = find_markdown_title(kwargs["body"])
+                    kwargs["title"], kwargs["body"] = extract_title(kwargs["body"])
 
             if not kwargs.get("title"):
                 kwargs["title"] = guess_file_title(path.basename)
@@ -85,6 +90,7 @@ def generate_html():
             content_path = os.path.join(content_path, "index.html")
         else:
             page_html = page_to_html(content)
+            page_html = linker.linkify(page_html)
             html = j2.get_template("page.html.j2").render(
                 page=content, page_html=page_html, root=root
             )

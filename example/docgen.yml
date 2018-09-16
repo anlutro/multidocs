@@ -2,6 +2,7 @@ sources:
   - type: git
     url: https://github.com/anlutro/prove-cm
     root_dir: docs
+    title: Prove CM
 
 settings:
   source_dir: ./src

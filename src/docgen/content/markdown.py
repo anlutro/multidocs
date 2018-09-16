@@ -1,26 +1,33 @@
 import os.path
 
 from CommonMarkExtensions.tables import ParserWithTables, RendererWithTables
-import bleach.linkifier
-
-
-def _linkify_callback(attrs, new=False):
-    if not new:
-        return attrs
-
-    # try to filter out things that might look like URLs but aren't
-    if (
-        not attrs["_text"].startswith(("http:", "https:", "www."))
-        and "/" not in attrs["_text"]
-    ):
-        return None
-
-    return attrs
 
 
 parser = ParserWithTables()
 renderer = RendererWithTables()
-linker = bleach.linkifier.Linker(callbacks=[_linkify_callback])
+
+
+def extract_title(markdown):
+    """ Given markdown text, return the title and body. """
+    body = None
+    title = None
+    prev_line = None
+    for line in markdown.splitlines():
+        # prevent comments in code blocks from becoming titles
+        if line.startswith("```"):
+            break
+        if line.startswith("# "):
+            title = line[2:].strip()
+        elif prev_line and line.count("=") >= len(prev_line) / 2:
+            title = prev_line
+        if title:
+            idx = markdown.index(title) + len(title)
+            body = markdown[idx:].strip()
+        prev_line = line.strip()
+
+    if not body:
+        body = markdown
+    return title, body.strip()
 
 
 def transform_url(url, page):
@@ -54,6 +61,4 @@ def page_to_html(page):
     for node, entering in ast.walker():
         if entering and node.t == "link":
             node.destination = transform_url(node.destination, page)
-    html = renderer.render(ast)
-    html_linkified = linker.linkify(html)
-    return html_linkified
+    return renderer.render(ast)
