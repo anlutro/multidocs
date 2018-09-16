@@ -6,11 +6,13 @@ import logging
 
 def serve_webapp(args):
     import docgen.web.app
+
     docgen.web.app.run_server()
 
 
 def generate_html(args):
     import docgen.content
+
     docgen.content.generate_html()
 
 

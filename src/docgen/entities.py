@@ -71,8 +71,17 @@ class Content(Path):
     def __init__(self, path, source, title=None, parent=None, slug=None):
         super().__init__(path, parent=parent)
         self.source = source
-        self.title = title or os.path.basename(path)
-        self.slug = slug or slugify.slugify(self.title)
+        self.title = title
+        if slug:
+            self.slug = slug
+        else:
+            if title:
+                self.slug = slugify.slugify(self.title)
+            else:
+                self.slug = os.path.basename(self.path)
+
+    def __gt__(self, other):
+        return (self.title or self.slug) > (other.title or other.slug)
 
 
 class Directory(Content):

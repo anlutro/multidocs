@@ -55,8 +55,16 @@ body {
     color: #666;
 }
 
-.page-link {
+.content-links {
     float: right;
+    padding: 0;
+    margin: 0;
+}
+ul.content-links {
+    list-style: none;
+}
+ul.content-links li {
+    display: inline-block;
     margin-left: 1em;
 }
 
