@@ -1,0 +1,16 @@
+{% extends 'layout.html.j2' %}
+
+{% block title %}Search results{% endblock %}
+
+{% block content %}
+<div class="search-results">
+    {% for result in results %}
+    <div class="search-result">
+        <a href="{{ result.path }}"><h3>{{ result.title }}</h3></a>
+        {% if result.highlight %}
+        <p class="search-excerpt">{{ result.highlight }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

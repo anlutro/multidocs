@@ -21,4 +21,5 @@ def populate_children(parent, path, root_path):
 
 
 def populate_source_from_path(source, path):
+    source.root_path = path
     populate_children(source, path, path)

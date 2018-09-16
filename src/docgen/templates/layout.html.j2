@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} | DocGen</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+{% macro render_sidebar_children(children, class='') %}
+<ul class="{{ class }}">
+{% for child in children | sort %}
+    <li>
+        <a href="/{{ child.path }}">{{ child.title }}</a>
+        {% if child.children %}
+            {{ render_sidebar_children(child.children) }}
+        {% endif %}
+    </li>
+{% endfor %}
+</ul>
+{% endmacro %}
+
+<div class="container">
+    <aside class="sidebar">
+        <form action="/search">
+            <input name="for" type="text" placeholder="Search for ...">
+            <input type="submit" value="Search">
+        </form>
+        <ul class="treeView">
+            <li class="collapsibleListRoot">
+                Content
+                {{ render_sidebar_children(sources, 'collapsibleList') }}
+            </li>
+        </ul>
+    </aside>
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+</div>
+
+<script type="text/javascript" src="/static/collapsible-lists.js"></script>
+
+{% block js_body %}{% endblock %}
+
+</body>
+</html>

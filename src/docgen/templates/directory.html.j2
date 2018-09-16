@@ -1,0 +1,33 @@
+{% extends 'layout.html.j2' %}
+
+{% macro render_page_children(children, deep=True) %}
+    <ul>
+    {% for child in children | sort %}
+        <li>
+            <a href="/{{ child.path }}">{{ child.title }}</a>
+            {% if deep and child.children %}
+                {{ render_page_children(child.children, deep=False) }}
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endmacro %}
+
+{% block title %}{{ directory.title }}{% endblock %}
+
+{% block content %}
+    <header class="directory-header">
+        <h1 class="directory-title">{{ directory.title }}</h1>
+    </header>
+    <div class="directory-content">
+        {{ render_page_children(directory.children) }}
+    </div>
+    <footer class="content-footer">
+        <time>Generated at {{ now.isoformat() }}</time>
+    </footer>
+{% endblock %}
+
+{% block js_body %}
+{% from "macros.j2" import expand_selected_item %}
+{{ expand_selected_item(directory) }}
+{% endblock %}

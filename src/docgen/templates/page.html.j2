@@ -1,0 +1,28 @@
+{% extends 'layout.html.j2' %}
+
+{% macro edit_link() %}
+    {% if edit_url is defined %}
+        <a href="{{ edit_url }}" target="_blank" class="edit-link">Edit on github</a>
+    {% endif %}
+{% endmacro %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+{{ edit_link() }}
+    <article class="page-content">
+        {% if not page_html.startswith('<h1>') %}
+        <h1>{{ page.title | capitalize }}</h1>
+        {% endif %}
+        {{ page_html | safe }}
+    </article>
+    <footer class="content-footer">
+        <time>Generated at {{ now.isoformat() }}</time>
+        {{ edit_link() }}
+    </footer>
+{% endblock %}
+
+{% block js_body %}
+{% from "macros.j2" import expand_selected_item %}
+{{ expand_selected_item(page) }}
+{% endblock %}

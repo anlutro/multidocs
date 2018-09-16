@@ -9,6 +9,7 @@ class Source:
         self.root_dir = root_dir
         self.title = title or os.path.basename(url)
         self.slug = slug or slugify.slugify(self.title)
+        self.path = self.slug
         self.children = set()
 
     def __repr__(self):
@@ -33,6 +34,9 @@ class Path:
 
     def __repr__(self):
         return "<%s %r>" % (self.__class__.__name__, self.path)
+
+    def __gt__(self, other):
+        return self.path > other.path
 
 
 class SourcePath(Path):
@@ -62,10 +66,19 @@ class Content(Path):
 
 
 class Directory(Content):
-    pass
+    is_dir = True
+
+
+class ContentSource(Directory):
+    def __init__(self, source):
+        super().__init__(
+            source.slug, source, title=source.title, parent=None, slug=source.slug
+        )
 
 
 class Page(Content):
-    def __init__(self, path, source, title, body, parent=None, slug=None):
-        super().__init__(path, source, title, parent=parent, slug=slug)
+    is_dir = False
+
+    def __init__(self, path, source, body, title=None, parent=None, slug=None):
+        super().__init__(path, source, title=title, parent=parent, slug=slug)
         self.body = body

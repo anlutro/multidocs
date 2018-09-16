@@ -31,7 +31,7 @@ def download_source(url, **kwargs):
     env = {}
     ssh_key = kwargs.pop("ssh_key", None) or settings.git_ssh_key
     if ssh_key:
-        env["GIT_SSH_COMMAND"] = "git -i %s" % ssh_key
+        env["GIT_SSH_COMMAND"] = "ssh -i %s" % ssh_key
 
     source = GitSource(url, **kwargs)
     git_path = os.path.join(settings.source_dir, source.slug)
@@ -47,9 +47,9 @@ def download_source(url, **kwargs):
         if url not in res.stdout:
             print(res.stdout)
             raise RuntimeError("url not in git remote")
-        subprocess.run(["git", "-C", git_path, "pull"], env=env, check=True)
+        subprocess.run(["git", "-C", git_path, "pull", "-q"], env=env, check=True)
     else:
-        subprocess.run(["git", "clone", url, git_path], env=env, check=True)
+        subprocess.run(["git", "clone", "-q", url, git_path], env=env, check=True)
 
     if not source.branch:
         res = subprocess.run(
