@@ -17,6 +17,9 @@ def serve_html(path):
     if os.path.isdir(full_path):
         path += "/index.html"
 
+    if not os.path.exists(path) and not path.endswith(".html"):
+        path = path + ".html"
+
     return flask.send_from_directory(settings.target_dir, path, cache_timeout=-1)
 
 
