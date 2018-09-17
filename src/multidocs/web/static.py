@@ -3,7 +3,7 @@ import os.path
 import flask
 from flask.blueprints import Blueprint
 
-from docgen.globals import settings
+from multidocs.globals import settings
 from .auth import requires_login
 
 

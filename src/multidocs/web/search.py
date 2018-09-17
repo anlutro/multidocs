@@ -1,7 +1,7 @@
 import flask
 from flask.blueprints import Blueprint
 
-from docgen.content import get_sidebar_html
+from multidocs.content import get_sidebar_html
 from .auth import requires_login
 
 

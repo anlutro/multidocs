@@ -5,15 +5,15 @@ import logging
 
 
 def serve_webapp(args):
-    import docgen.web.app
+    import multidocs.web.app
 
-    docgen.web.app.run_server()
+    multidocs.web.app.run_server()
 
 
 def generate_html(args):
-    import docgen.content
+    import multidocs.content
 
-    docgen.content.generate_html()
+    multidocs.content.generate_html()
 
 
 def main():
@@ -25,8 +25,8 @@ def main():
     logging.basicConfig(level=logging.DEBUG)
 
     if args.config:
-        os.environ.setdefault("DOCGEN_CONFIG_FILE", os.path.abspath(args.config))
-        os.chdir(os.path.dirname(os.environ["DOCGEN_CONFIG_FILE"]))
+        os.environ.setdefault("MULTIDOCS_CONFIG_FILE", os.path.abspath(args.config))
+        os.chdir(os.path.dirname(os.environ["MULTIDOCS_CONFIG_FILE"]))
 
     if args.command == "serve":
         return serve_webapp(args)

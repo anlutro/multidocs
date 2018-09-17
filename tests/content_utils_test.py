@@ -1,7 +1,7 @@
 from unittest import mock
 import pytest
 
-from docgen.content.utils import transform_url
+from multidocs.content.utils import transform_url
 
 
 @pytest.mark.parametrize(

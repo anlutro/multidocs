@@ -4,10 +4,10 @@ import re
 
 import bleach.linkifier
 
-from docgen.globals import config, settings, j2
-from docgen.search import get_search
-from docgen.sources import download_source
-from docgen import entities
+from multidocs.globals import config, settings, j2
+from multidocs.search import get_search
+from multidocs.sources import download_source
+from multidocs import entities
 from . import markdown
 
 

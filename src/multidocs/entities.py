@@ -2,7 +2,7 @@ import os.path
 
 import slugify
 
-from docgen.globals import settings
+from multidocs.globals import settings
 
 
 def _get_source(obj, source=None):

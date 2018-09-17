@@ -12,7 +12,7 @@ class Undefined:
         return "UNDEFINED"
 
     def __repr__(self):
-        return "<docgen.settings.Undefined>"
+        return "<multidocs.settings.Undefined>"
 
 
 UNDEF = Undefined()
@@ -38,7 +38,7 @@ def get_settings():
 
             # environment variables
     for key, val in os.environ.items():
-        if not key.startswith("DOCGEN_"):
+        if not key.startswith("MULTIDOCS_"):
             continue
         key = key[7:].lower()
         values[key] = val

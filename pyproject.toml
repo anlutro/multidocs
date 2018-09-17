@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "docgen"
-description = "Generate documentation"
+name = "multidocs"
+description = "Generate documentation from multiple sources."
 authors = ["Andreas Lutro <anlutro@gmail.com>"]
 version = "0.1"
 readme = "README.md"
@@ -23,4 +23,4 @@ pylint = "*"
 black = "*"
 
 [tool.poetry.scripts]
-docgen = "docgen.cli:main"
+multidocs = "multidocs.cli:main"

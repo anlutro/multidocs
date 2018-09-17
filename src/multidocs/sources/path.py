@@ -1,7 +1,7 @@
 import os
 import os.path
 
-from docgen.entities import SourceFile, SourceDirectory
+from multidocs.entities import SourceFile, SourceDirectory
 
 
 def populate_children(parent, path, root_path):

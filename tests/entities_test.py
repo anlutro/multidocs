@@ -1,6 +1,6 @@
 from unittest import mock
 
-from docgen.entities import Content
+from multidocs.entities import Content
 
 
 def test_content_is_sorted_by_path():

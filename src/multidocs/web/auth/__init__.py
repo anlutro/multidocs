@@ -5,7 +5,7 @@ import flask
 from flask import current_app
 from flask.blueprints import Blueprint
 
-from docgen.globals import settings
+from multidocs.globals import settings
 
 
 class Authenticator:

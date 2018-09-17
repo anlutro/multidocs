@@ -1,8 +1,8 @@
 import os.path
 import subprocess
 
-from docgen.globals import settings
-from docgen.entities import GitSource
+from multidocs.globals import settings
+from multidocs.entities import GitSource
 
 from .path import populate_source_from_path
 

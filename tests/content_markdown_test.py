@@ -1,4 +1,4 @@
-from docgen.content.markdown import extract_title
+from multidocs.content.markdown import extract_title
 
 
 def test_extract_title():

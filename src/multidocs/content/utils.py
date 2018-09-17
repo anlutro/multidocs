@@ -19,7 +19,7 @@ def transform_url(url, page, source=None):
         return urlunsplit((urlparts.scheme, urlparts.netloc, new_path, "", ""))
 
     # at this point we know we're dealing with a relative URL which is inside
-    # the docgen directory, so we can safely replace md with html
+    # the multidocs directory, so we can safely replace md with html
     if url.endswith(".md"):
         url = url[:-3] + ".html"
 

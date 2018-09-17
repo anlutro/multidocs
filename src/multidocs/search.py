@@ -7,7 +7,7 @@ import whoosh.index
 import whoosh.fields
 import whoosh.qparser
 
-from docgen.globals import settings
+from multidocs.globals import settings
 
 log = logging.getLogger(__name__)
 

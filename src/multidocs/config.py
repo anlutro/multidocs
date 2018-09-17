@@ -7,12 +7,12 @@ _conf_values = None
 
 
 def read_config():
-    conf_file = os.environ.get("DOCGEN_CONFIG_FILE")
+    conf_file = os.environ.get("MULTIDOCS_CONFIG_FILE")
     if conf_file:
         if not os.path.exists(conf_file):
-            raise RuntimeError("DOCGEN_CONFIG_FILE %r does not exist" % conf_file)
+            raise RuntimeError("MULTIDOCS_CONFIG_FILE %r does not exist" % conf_file)
         if not os.path.isfile(conf_file):
-            raise RuntimeError("DOCGEN_CONFIG_FILE %r is not a file" % conf_file)
+            raise RuntimeError("MULTIDOCS_CONFIG_FILE %r is not a file" % conf_file)
         with open(conf_file) as fh:
             return yaml.safe_load(fh)
 

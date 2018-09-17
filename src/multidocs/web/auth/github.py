@@ -4,7 +4,7 @@ import flask
 from flask_oauthlib.client import OAuth
 
 from . import Authenticator
-from docgen.globals import settings
+from multidocs.globals import settings
 
 
 def _matches_conf(items, configs):

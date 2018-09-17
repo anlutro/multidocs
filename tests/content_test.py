@@ -1,4 +1,4 @@
-from docgen.content import guess_file_title
+from multidocs.content import guess_file_title
 
 
 def test_guess_file_title():
