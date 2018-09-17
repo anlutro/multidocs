@@ -1,0 +1,28 @@
+branches:
+  - master
+  - develop
+
+cache:
+  pip: true
+
+jobs:
+  include:
+    - name: black
+      language: python
+      python: 3.6
+      install: pip install black
+      script: black --check src tests
+
+    - &code-test
+      name: py3.6 - lint + tests
+      python: 3.6
+      language: python
+      install:
+        - pip install poetry
+        - poetry develop
+      script:
+        - pylint -E multidocs
+        - pytest
+    - <<: *code-test
+      name: py3.5 - lint + tests
+      python: 3.5

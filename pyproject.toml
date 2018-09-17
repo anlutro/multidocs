@@ -6,7 +6,7 @@ version = "0.1.1"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.5"
 bleach = "^2.1"
 commonmarkextensions = "^0.0.4"
 flask = "^1.0"
@@ -20,7 +20,6 @@ whoosh = "^2.7"
 pytest = "*"
 pytest-flask = "*"
 pylint = "*"
-black = "*"
 
 [tool.poetry.scripts]
 multidocs = "multidocs.cli:main"
