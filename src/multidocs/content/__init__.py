@@ -4,7 +4,8 @@ import re
 
 import bleach.linkifier
 
-from multidocs.globals import config, settings, j2
+import multidocs.jinja2
+from multidocs.globals import config, settings
 from multidocs.search import get_search
 from multidocs.sources import download_source
 from multidocs import entities
@@ -95,6 +96,7 @@ def generate_html():
             contents[path] = content
 
     sources = list(sources.values())
+    j2 = multidocs.jinja2.get_jinja2_env()
 
     # write HTML from content objects
     for content in contents.values():
