@@ -1,5 +1,9 @@
 # multidocs
 
+[![Build Status](https://travis-ci.org/anlutro/multidocs.svg?branch=master)](https://travis-ci.org/anlutro/multidocs)
+[![Latest version on PyPI](https://img.shields.io/pypi/v/multidocs?maxAge=2592000)](https://pypi.python.org/pypi/multidocs)
+[![Licence](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 Generate a searchable HTML website with documentation from multiple git repositories containing Markdown files.
 
 ## Installing
