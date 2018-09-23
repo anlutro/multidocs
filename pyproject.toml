@@ -4,6 +4,7 @@ description = "Generate documentation from multiple sources."
 authors = ["Andreas Lutro <anlutro@gmail.com>"]
 version = "0.1.1"
 readme = "README.md"
+license = "GPLv3"
 
 [tool.poetry.dependencies]
 python = "^3.5"
