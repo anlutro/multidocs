@@ -14,8 +14,8 @@ jobs:
       script: black --check src tests
 
     - &code-test
-      name: py3.6 - lint + tests
-      python: 3.6
+      name: py3.7 - lint + tests
+      python: 3.7
       language: python
       install:
         - pip install poetry
@@ -23,6 +23,9 @@ jobs:
       script:
         - pylint -E multidocs
         - pytest
+    - <<: *code-test
+      name: py3.6 - lint + tests
+      python: 3.6
     - <<: *code-test
       name: py3.5 - lint + tests
       python: 3.5
