@@ -1,0 +1,8 @@
+bleach
+commonmarkextensions
+flask
+flask-oauthlib
+jinja2
+python-slugify
+pyyaml
+whoosh
