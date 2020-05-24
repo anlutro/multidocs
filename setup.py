@@ -24,7 +24,7 @@ setup(
     author='Andreas Lutro',
     author_email='anlutro@gmail.com',
     url='https://github.com/anlutro/multidocs',
-    install_requires=parse_requirements(),
+    install_requires=list(parse_requirements()),
     packages=find_packages(where='src'),
     package_dir={'': 'src'},
 )
