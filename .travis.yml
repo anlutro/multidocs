@@ -1,33 +1,26 @@
 branches:
   - master
-  - develop
 
+dist: xenial
+sudo: false
+language: python
 cache:
   pip: true
 
-dist: xenial
+python:
+  - '3.8'
+  - '3.7'
+  - '3.6'
+  - '3.5'
+install: pip install -e . --upgrade pytest pytest-flask
+script: pytest
 
 jobs:
   include:
     - name: black
-      language: python
-      python: 3.7
-      install: pip install black
-      script: black --check src tests
+      install: pip install --upgrade black
+      script: black --check .
 
-    - &code-test
-      name: py3.8 - lint + tests
-      python: 3.8
-      language: python
-      install:
-        - pip install --upgrade pip setuptools
-        - pip install --upgrade -r requirements-dev.txt
-      script:
-        - pylint -E multidocs
-        - pytest
-    - <<: *code-test
-      name: py3.7 - lint + tests
-      python: 3.7
-    - <<: *code-test
-      name: py3.6 - lint + tests
-      python: 3.6
+    - name: pylint
+      install: pip install -e . --upgrade pylint
+      script: pylint -E russell
