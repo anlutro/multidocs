@@ -23,4 +23,4 @@ jobs:
 
     - name: pylint
       install: pip install -e . --upgrade pylint
-      script: pylint -E russell
+      script: pylint -E multidocs
